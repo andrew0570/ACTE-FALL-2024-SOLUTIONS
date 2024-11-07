@@ -5,21 +5,9 @@
 using namespace std;
 using ll=long long;
 
-/*
-
-ABCCDEEAABCDE
-2
-AB
-CD
-
-*/
-
-
 
 int main() //brute force solution
 {
-    freopen("input2.in", "r", stdin);
-    auto start = std::chrono::high_resolution_clock::now();
 
     string input;
     cin>>input;
@@ -58,19 +46,9 @@ int main() //brute force solution
         }
         if(flag==0){ans++;} //we didn't find a forbidden substring so we find a valid permutation
 
-    }while(next_permutation(all(input)));
-
-
-
+    } while(next_permutation(all(input)));
 
     //the above algorithm is very inefficient, runnning in something like O(n!*m).
     //can you apply a mathematical principle to make it more efficient? (Something relating to multiset counting?)
-
-
-    //dbg(ans);
     cout<<ans<<endl;
-
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> duration = end - start;
-    std::cout << "Elapsed time: " << duration.count() << " seconds" << std::endl;
 }
