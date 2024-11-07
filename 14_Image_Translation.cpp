@@ -14,8 +14,6 @@ using namespace std;
 
 int main()
 {
-    freopen("input2.in","r",stdin);
-    freopen("output1.out","w",stdout);
     int k,rows,cols; 
     cin>>k; //which translation
     cin>>rows; //num columns
