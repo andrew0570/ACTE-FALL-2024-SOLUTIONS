@@ -9,7 +9,11 @@
 using ll=long long;
 using namespace std;
 
-//add stipulation in the problem description that there will only be at most, 26 possible cities.
+//this is not the optimal way to do this, a better way would have been C++17 Structured Bindings, but the ACTE website doesn't support C++17
+//thus, we had to write the solution as iterating through pairs of std::map, making it kind of confusing.
+//for the structured bindings implementation, dm Vineet.
+
+//the cout statements that are commented out provide a better view of how the minimum spanning tree is begin made. Uncomment them to see.
 
 
 using graph = std::map<char, std::vector<pair<char,float>>>;
@@ -20,11 +24,10 @@ float distance(float x1,float y1,float x2,float y2) //distance formula for 2 euc
     float dy=y2-y1;
     float dist=sqrt((dx*dx)+(dy*dy));
     return dist;
-    //float dist=sqrt(pow((x2-x1),2)+pow((y2-y1),2));
 }
 
 
-float primsMST(graph g,char start) //implementation of Prim's algorithm for constructing a minimum spanning tree.
+float primsMST(graph g,char start) //implementation of Prim's algorithm for constructing a minimum spanning tree. (Search it up)
 {
     //need a priority queue that picks the smallest edge from amongst all the edges of 'A' connecting to every other node
     priority_queue<pair<float, pair<char, char>>, vector<pair<float, pair<char, char>>>, greater<pair<float, pair<char, char>>>> pq;
@@ -38,7 +41,7 @@ float primsMST(graph g,char start) //implementation of Prim's algorithm for cons
     auto v=g[start]; //where v is the vector
     for(const auto& k: v) //vector<pair<char,float>>
     {
-        pq.push({k.se,{start,k.fi}}); //<cost<parent,child>
+        pq.push({k.se,{start,k.fi}});
     }
     while(!pq.empty())
     {
@@ -46,7 +49,6 @@ float primsMST(graph g,char start) //implementation of Prim's algorithm for cons
         pq.pop();
         if(!inMST[topel.se.se])
         {
-            //MST[topel.se.se]=topel.fi; (ignore)
             MST[topel.se.fi].pb(topel.se.se);
             inMST[topel.se.se]=true;
             auto vv=g[topel.se.se];
@@ -57,16 +59,16 @@ float primsMST(graph g,char start) //implementation of Prim's algorithm for cons
         }
     }
     float cost;
-    for(const auto& pair:MST)
-    {
-        for(const auto& kk:pair.se)
-        {
-            cout<<pair.fi<<" -> "<<kk<<endl;
-        }
-    }
+    // for(const auto& pair:MST) //print out the minimum spanning tree
+    // {
+    //     for(const auto& kk:pair.se)
+    //     {
+    //         cout<<pair.fi<<" -> "<<kk<<endl;
+    //     }
+    // }
 
-    for (const auto& p1 : MST) 
-    {//[parent,children]
+    for (const auto& p1 : MST) //add up the cost for all the edges
+    {
         for (const char child : p1.se) 
         {
             // Find the cost of the edge from parent to child
@@ -88,8 +90,6 @@ float primsMST(graph g,char start) //implementation of Prim's algorithm for cons
 int main()
 {
     
-    freopen("input1.in","r",stdin);
-    auto start = std::chrono::high_resolution_clock::now();
     int budget;
     cin>>budget;
     int k;
@@ -107,17 +107,14 @@ int main()
     }
     graph g; //using graph = std::map<char, std::vector<std::pair<char, float>>>
     
-    // for (const auto &[key, value]: coords) 
-    // {
-    //     cout<<key<<" "<<value.fi<<"  "<<value.second<<endl;
-    // }
 
-    for(const auto &pair1:coords)
+    for(const auto &pair1:coords) //generate the distance between eery possible pair of point. This is not at all optimal because it runs in O(n^2).
+                                 //to get a more efficient solution, you can try implementing k-nearest neighbor or delauney triangulation
     {
         vector<pair<char,float>>v;
         for(const auto &pair2:coords)
         {
-            if(pair1.fi!=pair2.fi)
+            if(pair1.fi!=pair2.fi) //if the two points aren't the same
             {
                 pair<char,float>p;
                 p.fi=pair2.fi;
@@ -127,29 +124,26 @@ int main()
         }
         g[pair1.fi]=v;
     }
-    cout<<endl<<"<>"<<endl;
-    for(const auto &pair1:g)
-    {
-        cout<<pair1.fi<<" connects to\n";
-        for(const auto &k:pair1.se)
-        {
-            cout<<k.fi<<" with cost "<<k.se<<endl;
-        }
-        cout<<"---------------------"<<endl;
-    }
-    float cost=primsMST(g,g.begin()->first);
-    cout<<"The cost is "<<cost<<endl;
-    if(cost<budget)
+    // cout<<endl<<"<>"<<endl;
+    // for(const auto &pair1:g)
+    // {
+    //     cout<<pair1.fi<<" connects to\n";
+    //     for(const auto &k:pair1.se)
+    //     {
+    //         cout<<k.fi<<" with cost "<<k.se<<endl;
+    //     }
+    //     cout<<"---------------------"<<endl;
+    // }
+    float cost=primsMST(g,g.begin()->first); //we pass in the graph g and the first node, denoted by the -> operator to dereference it.
+    // cout<<"The cost is "<<cost<<endl;
+    
+    if(cost<budget) //check if its within the budget
     {
         cout<<"True"<<endl;
     }
-    else{cout<<"false"<<endl;}
+    else{cout<<"False"<<endl;}
 
 
-
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> duration = end - start;
-    std::cout << "Elapsed time: " << duration.count() << " seconds" << std::endl;
 
     return 0;
     
