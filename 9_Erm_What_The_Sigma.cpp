@@ -6,7 +6,6 @@ using namespace std;
 
 int main()
 {
-    freopen("input2.in","r",stdin);
     int n,sum,size;
     cin>>n;
     cin>>size;
