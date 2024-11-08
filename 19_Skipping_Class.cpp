@@ -11,16 +11,6 @@ using namespace std;
 using graph = std::map<char, std::vector<pair<char,int>>>;
 //note that this algorithm runs in O(V+E) for V=# of nodes, and E=# of edges, making this algorthim both linear and pretty fast.
 
-
-//num nodes (n)
-//num connections (k)
-//k lines of m,l,p for node1,node2,cost
-//start ,end
-
-//output the cost of the longest path
-
-//the longest path in the example from B to D would be B->C->D with cost 12
-
 void dfs(char dfstart,graph& g,std::map<char,bool>&visited,stack<char>&topostack) //apply a recursive depth first search to visit every node.
 {
     visited[dfstart]=true;
@@ -33,7 +23,7 @@ void dfs(char dfstart,graph& g,std::map<char,bool>&visited,stack<char>&topostack
 
         }
     }
-    topostack.push(dfstart); //as we visited every neighbor of any node n, it gets added to the stack(first in, last out)
+    topostack.push(dfstart); //as we visited every neighbor of any node n, node n gets added to the stack(first in, last out)
     // cout<<"pushing "<<dfstart<<endl; //what we are adding to the stack as we visit all of dfstart's neighbors
 }
 
@@ -82,9 +72,10 @@ int longestPath(graph g,stack<char>topostack,char start,char end)
         topostack.pop(); //remove the first node
         if(u==end){break;} //if the current node is the destination, we have arrived and can break
         for (auto& p : g[u]) //otherwise, just continue, building out the distances
-        {  // For each outgoing edge u -> v
+        { 
             char v = p.first;
             int edge_cost = p.second;
+            
             if (distance[u] + edge_cost > distance[v]) //if the distance between the current node and its connection is greater than the connecting node we already have
             {
                 distance[v] = distance[u] + edge_cost; //we update the distance because we found a new longer distance and we need to maximize the distance
@@ -104,8 +95,6 @@ int longestPath(graph g,stack<char>topostack,char start,char end)
 
 int main()
 {
-    freopen("input1.in","r",stdin);
-    auto startt = std::chrono::high_resolution_clock::now();
     int n,k;
     cin>>n;
     cin>>k;
@@ -135,10 +124,6 @@ int main()
     stack<char>topostack=topologicalSort(g);
     int cost=longestPath(g,topostack,start,end);
     cout<<cost<<endl; 
-
-    auto endd = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> duration = endd - startt;
-    std::cout << "Elapsed time: " << duration.count() << " seconds" << std::endl;
 
 
 
