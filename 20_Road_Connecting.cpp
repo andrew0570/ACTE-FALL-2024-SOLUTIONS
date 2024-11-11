@@ -89,7 +89,8 @@ float primsMST(graph g,char start) //implementation of Prim's algorithm for cons
 
 int main()
 {
-    
+    // freopen("input2.in","r",stdin);   
+    // freopen("output1.out","w",stdout);
     int budget;
     cin>>budget;
     int k;
@@ -139,9 +140,10 @@ int main()
     
     if(cost<budget) //check if its within the budget
     {
-        cout<<"True"<<endl;
+         std::cout << std::fixed << std::setprecision(2);
+        cout<<"True "<<cost<<endl;
     }
-    else{cout<<"False"<<endl;}
+    else{std::cout << std::fixed << std::setprecision(2);cout<<"False "<<cost<<endl;}
 
 
 
