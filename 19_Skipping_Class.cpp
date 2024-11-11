@@ -27,7 +27,7 @@ void dfs(char dfstart,graph& g,std::map<char,bool>&visited,stack<char>&topostack
     // cout<<"pushing "<<dfstart<<endl; //what we are adding to the stack as we visit all of dfstart's neighbors
 }
 
-auto topologicalSort(graph g)
+stack<char> topologicalSort(graph g)
 {
     map<char,bool>visited; //keep track of what nodes we have visited
     for(auto pair:g)
