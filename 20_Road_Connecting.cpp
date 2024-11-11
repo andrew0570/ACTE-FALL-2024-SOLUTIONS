@@ -140,10 +140,9 @@ int main()
     
     if(cost<budget) //check if its within the budget
     {
-         std::cout << std::fixed << std::setprecision(2);
-        cout<<"True "<<cost<<endl;
+         std::cout << std::fixed << std::setprecision(2)<<"True "<<cost<<endl;
     }
-    else{std::cout << std::fixed << std::setprecision(2);cout<<"False "<<cost<<endl;}
+    else{std::cout << std::fixed << std::setprecision(2)<<"False "<<cost<<endl;}
 
 
 
