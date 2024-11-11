@@ -10,5 +10,4 @@ for letters in name: #loops through every letter
 for keys in dictletters: #traverses dictionary
     if(dictletters[keys]>greatest): #finding key (Letter) with greatest count
         greatest=dictletters[keys]
-print(dictletters)
 print(str(greatest)+" packs")
