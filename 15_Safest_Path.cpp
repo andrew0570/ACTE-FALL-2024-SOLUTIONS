@@ -36,7 +36,9 @@ int main(){
     pq.push({1,src}); // start with 100% at src city
 
     while(!pq.empty()){
-        auto[curr,city] = pq.top();
+        //auto[curr,city] = pq.top();
+        double curr=pq.top().first;
+        char city=pq.top().second;
         pq.pop();
         if(curr<=maxSafety[city-65]) continue; // remove city if it has already been visited with higher probability
         
