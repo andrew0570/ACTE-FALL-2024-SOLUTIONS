@@ -10,12 +10,10 @@ int main()
     cin>>n;
     cin>>size;
     vector<int>s(size);
-    for(auto &c:s) //read in all the numbers we will need to cahck for divisibility
+    for(auto &c:s) //read in all the numbers we will need to check for divisibility
     {
         cin>>c;
     }
-
-    //for(const auto &c:s){cout<<c<<" ";}cout<<endl; //this would output the above vector
 
     for(int index=1; index<=n; ++index) //for every number between 1,n inclusive
     {
