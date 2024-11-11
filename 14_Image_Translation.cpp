@@ -1,4 +1,4 @@
-#pragma GCC optimize("Ofast","unroll-loops") //for gcc compilers
+//#pragma GCC optimize("Ofast","unroll-loops") //for gcc compilers
 #include <bits\stdc++.h>
 #define dbg(x) std::cout<<#x<<" = "<<x<<endl;
 #define pb push_back
