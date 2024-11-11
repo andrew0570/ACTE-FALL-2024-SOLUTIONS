@@ -1,5 +1,5 @@
 #pragma GCC optimize("Ofast","unroll-loops")
-#include <bits\stdc++.h>
+#include <bits/stdc++.h>
 #define dbg(x) std::cout << #x << " = " << x << endl;
 #define all(x) (x).begin(), (x).end()
 using namespace std;
