@@ -22,7 +22,7 @@ int main()
             // cout<<"index is "<<index<<" and ";
             // dbg(c);
 
-            if(index%c==0) //if it is divisible, then we add it to the running sum
+            if(c!=0 && index%c==0) //if it is divisible, then we add it to the running sum
             {
                 sum+=index;
                 //cout<<index<<endl;
